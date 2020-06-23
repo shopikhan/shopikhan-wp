@@ -1,0 +1,757 @@
+# Copyright (C) 2020 WPClever.net
+# This file is distributed under the same license as the WPC Product Bundles for WooCommerce plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPC Product Bundles for WooCommerce 4.0.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-product-bundle\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-04-11T06:46:21+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.2.0\n"
+"X-Domain: woo-product-bundle\n"
+
+#. Plugin Name of the plugin
+msgid "WPC Product Bundles for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wpclever.net/"
+msgstr ""
+
+#. Description of the plugin
+msgid "WPC Product Bundles is a plugin help you bundle a few products, offer them at a discount and watch the sales go up!"
+msgstr ""
+
+#. Author of the plugin
+msgid "WPClever.net"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpclever.net"
+msgstr ""
+
+#: wpc-product-bundles.php:71
+#: wpc-product-bundles.php:97
+#: wpc-product-bundles.php:1190
+#: wpc-product-bundles.php:1213
+msgid "Add to cart"
+msgstr ""
+
+#: wpc-product-bundles.php:77
+#: wpc-product-bundles.php:1196
+msgid "Select options"
+msgstr ""
+
+#: wpc-product-bundles.php:84
+#: wpc-product-bundles.php:1202
+msgid "Read more"
+msgstr ""
+
+#: wpc-product-bundles.php:697
+msgid "Once Every 5 Minutes"
+msgstr ""
+
+#: wpc-product-bundles.php:840
+#: wpc-product-bundles.php:851
+#: wpc-product-bundles.php:2245
+msgid "WPC Product Bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:840
+msgid "Product Bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:854
+msgid "Thank you for using our plugin! If you are satisfied, please reward it a full five-star %s rating."
+msgstr ""
+
+#: wpc-product-bundles.php:857
+msgid "Reviews"
+msgstr ""
+
+#: wpc-product-bundles.php:859
+msgid "Changelog"
+msgstr ""
+
+#: wpc-product-bundles.php:861
+msgid "Discussion"
+msgstr ""
+
+#: wpc-product-bundles.php:868
+msgid "How to use?"
+msgstr ""
+
+#: wpc-product-bundles.php:872
+#: wpc-product-bundles.php:1572
+msgid "Settings"
+msgstr ""
+
+#: wpc-product-bundles.php:876
+msgid "Tools"
+msgstr ""
+
+#: wpc-product-bundles.php:880
+#: wpc-product-bundles.php:1573
+msgid "Premium Version"
+msgstr ""
+
+#: wpc-product-bundles.php:888
+msgid "When creating the product, please choose product data is \"Smart Bundle\" then you can see the search field to start search and add products to the bundle."
+msgstr ""
+
+#: wpc-product-bundles.php:900
+msgid "General"
+msgstr ""
+
+#: wpc-product-bundles.php:904
+msgid "Price format"
+msgstr ""
+
+#: wpc-product-bundles.php:907
+msgid "From min price"
+msgstr ""
+
+#: wpc-product-bundles.php:908
+msgid "Min price only"
+msgstr ""
+
+#: wpc-product-bundles.php:909
+msgid "Min - max"
+msgstr ""
+
+#: wpc-product-bundles.php:910
+msgid "Regular and sale price"
+msgstr ""
+
+#: wpc-product-bundles.php:913
+msgid "Choose the price format for bundle on the shop page."
+msgstr ""
+
+#: wpc-product-bundles.php:919
+#: wpc-product-bundles.php:2011
+#: wpc-product-bundles.php:2034
+#: wpc-product-bundles.php:2343
+msgid "Bundled products"
+msgstr ""
+
+#: wpc-product-bundles.php:923
+#: wpc-product-bundles.php:1135
+msgid "Position"
+msgstr ""
+
+#: wpc-product-bundles.php:928
+#: wpc-product-bundles.php:1140
+msgid "Above the add to cart button"
+msgstr ""
+
+#: wpc-product-bundles.php:932
+#: wpc-product-bundles.php:1144
+msgid "Under the add to cart button"
+msgstr ""
+
+#: wpc-product-bundles.php:936
+msgid "Under the title"
+msgstr ""
+
+#: wpc-product-bundles.php:940
+msgid "Under the price"
+msgstr ""
+
+#: wpc-product-bundles.php:944
+msgid "Under the excerpt"
+msgstr ""
+
+#: wpc-product-bundles.php:948
+#: wpc-product-bundles.php:1148
+msgid "In a new tab"
+msgstr ""
+
+#: wpc-product-bundles.php:952
+#: wpc-product-bundles.php:1152
+msgid "No (hide it)"
+msgstr ""
+
+#: wpc-product-bundles.php:955
+msgid "Choose the position to show the bundled products list."
+msgstr ""
+
+#: wpc-product-bundles.php:960
+msgid "Variations selector"
+msgstr ""
+
+#: wpc-product-bundles.php:965
+msgid "Default"
+msgstr ""
+
+#: wpc-product-bundles.php:969
+msgid "Use WPC Variations Radio Buttons"
+msgstr ""
+
+#: wpc-product-bundles.php:978
+msgid "Show thumbnail"
+msgstr ""
+
+#: wpc-product-bundles.php:983
+#: wpc-product-bundles.php:998
+#: wpc-product-bundles.php:1013
+#: wpc-product-bundles.php:1072
+#: wpc-product-bundles.php:1090
+#: wpc-product-bundles.php:1253
+#: wpc-product-bundles.php:1290
+#: wpc-product-bundles.php:1324
+#: wpc-product-bundles.php:1355
+#: wpc-product-bundles.php:1370
+#: wpc-product-bundles.php:1386
+#: wpc-product-bundles.php:1402
+#: wpc-product-bundles.php:1418
+#: wpc-product-bundles.php:1439
+#: wpc-product-bundles.php:1456
+msgid "Yes"
+msgstr ""
+
+#: wpc-product-bundles.php:987
+#: wpc-product-bundles.php:1002
+#: wpc-product-bundles.php:1017
+#: wpc-product-bundles.php:1036
+#: wpc-product-bundles.php:1059
+#: wpc-product-bundles.php:1076
+#: wpc-product-bundles.php:1098
+#: wpc-product-bundles.php:1227
+#: wpc-product-bundles.php:1257
+#: wpc-product-bundles.php:1294
+#: wpc-product-bundles.php:1313
+#: wpc-product-bundles.php:1328
+#: wpc-product-bundles.php:1359
+#: wpc-product-bundles.php:1374
+#: wpc-product-bundles.php:1390
+#: wpc-product-bundles.php:1406
+#: wpc-product-bundles.php:1422
+#: wpc-product-bundles.php:1443
+#: wpc-product-bundles.php:1460
+msgid "No"
+msgstr ""
+
+#: wpc-product-bundles.php:993
+msgid "Show quantity"
+msgstr ""
+
+#: wpc-product-bundles.php:1008
+msgid "Show short description"
+msgstr ""
+
+#: wpc-product-bundles.php:1023
+msgid "Show price"
+msgstr ""
+
+#: wpc-product-bundles.php:1028
+msgid "Price"
+msgstr ""
+
+#: wpc-product-bundles.php:1032
+msgid "Subtotal"
+msgstr ""
+
+#: wpc-product-bundles.php:1042
+msgid "Link to individual product"
+msgstr ""
+
+#: wpc-product-bundles.php:1047
+msgid "Yes, open in the same tab"
+msgstr ""
+
+#: wpc-product-bundles.php:1051
+msgid "Yes, open in the new tab"
+msgstr ""
+
+#: wpc-product-bundles.php:1055
+msgid "Yes, open quick view popup"
+msgstr ""
+
+#: wpc-product-bundles.php:1067
+msgid "Change image"
+msgstr ""
+
+#: wpc-product-bundles.php:1080
+msgid "Change the main product image when choosing the variation of bundled products."
+msgstr ""
+
+#: wpc-product-bundles.php:1085
+msgid "Change price"
+msgstr ""
+
+#: wpc-product-bundles.php:1094
+msgid "Yes, custom selector"
+msgstr ""
+
+#: wpc-product-bundles.php:1105
+msgid "Change the main product price when choosing the variation of bundled products. It uses JavaScript to change product price so it is very dependent on theme’s HTML. If it cannot find and update the product price, please contact us and we can help you find the right selector or adjust the JS file."
+msgstr ""
+
+#: wpc-product-bundles.php:1110
+msgid "Total text"
+msgstr ""
+
+#: wpc-product-bundles.php:1113
+msgid "Bundle price:"
+msgstr ""
+
+#: wpc-product-bundles.php:1117
+msgid "Saved text"
+msgstr ""
+
+#: wpc-product-bundles.php:1120
+#: wpc-product-bundles.php:1537
+msgid "(saved [d])"
+msgstr ""
+
+#: wpc-product-bundles.php:1122
+msgid "Use [d] to show the saved percentage or amount."
+msgstr ""
+
+#: wpc-product-bundles.php:1128
+#: wpc-product-bundles.php:2351
+msgid "Bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:1131
+msgid "Settings for bundles on the bundled product page."
+msgstr ""
+
+#: wpc-product-bundles.php:1155
+msgid "Choose the position to show the bundles list."
+msgstr ""
+
+#: wpc-product-bundles.php:1161
+#: wpc-product-bundles.php:2539
+msgid "Above text"
+msgstr ""
+
+#: wpc-product-bundles.php:1170
+#: wpc-product-bundles.php:2548
+msgid "Under text"
+msgstr ""
+
+#: wpc-product-bundles.php:1179
+msgid "\"Add to Cart\" button labels"
+msgstr ""
+
+#: wpc-product-bundles.php:1182
+msgid "Leave blank if you want to use the default text and can be translated."
+msgstr ""
+
+#: wpc-product-bundles.php:1186
+msgid "Archive/shop page"
+msgstr ""
+
+#: wpc-product-bundles.php:1192
+msgid "For purchasable bundle."
+msgstr ""
+
+#: wpc-product-bundles.php:1198
+msgid "For purchasable bundle and has variable product(s)."
+msgstr ""
+
+#: wpc-product-bundles.php:1204
+msgid "For un-purchasable bundle."
+msgstr ""
+
+#: wpc-product-bundles.php:1209
+msgid "Single product page"
+msgstr ""
+
+#: wpc-product-bundles.php:1218
+msgid "Cart & Checkout"
+msgstr ""
+
+#: wpc-product-bundles.php:1222
+msgid "Coupon restrictions"
+msgstr ""
+
+#: wpc-product-bundles.php:1231
+msgid "Exclude bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:1235
+msgid "Exclude bundled products"
+msgstr ""
+
+#: wpc-product-bundles.php:1239
+msgid "Exclude both bundles and bundled products"
+msgstr ""
+
+#: wpc-product-bundles.php:1243
+msgid "Choose products you want to exclude from coupons."
+msgstr ""
+
+#: wpc-product-bundles.php:1248
+msgid "Exclude un-purchasable products"
+msgstr ""
+
+#: wpc-product-bundles.php:1261
+msgid "Make the bundle still purchasable when one of the bundled products is un-purchasable. These bundled products are excluded from the orders."
+msgstr ""
+
+#: wpc-product-bundles.php:1266
+msgid "Cart contents count"
+msgstr ""
+
+#: wpc-product-bundles.php:1271
+msgid "Bundles only"
+msgstr ""
+
+#: wpc-product-bundles.php:1275
+msgid "Bundled products only"
+msgstr ""
+
+#: wpc-product-bundles.php:1279
+msgid "Both bundles and bundled products"
+msgstr ""
+
+#: wpc-product-bundles.php:1285
+msgid "Hide bundle name before bundled products"
+msgstr ""
+
+#: wpc-product-bundles.php:1300
+msgid "Hide bundled products on cart & checkout page"
+msgstr ""
+
+#: wpc-product-bundles.php:1305
+msgid "Yes, just show the main product"
+msgstr ""
+
+#: wpc-product-bundles.php:1309
+msgid "Yes, but show bundled product names under the main product"
+msgstr ""
+
+#: wpc-product-bundles.php:1319
+msgid "Hide bundled products on mini-cart"
+msgstr ""
+
+#: wpc-product-bundles.php:1332
+msgid "Hide bundled products, just show the main product on mini-cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1338
+#: wpc-product-bundles.php:2400
+msgid "Search"
+msgstr ""
+
+#: wpc-product-bundles.php:1342
+msgid "Search limit"
+msgstr ""
+
+#: wpc-product-bundles.php:1350
+msgid "Search by SKU"
+msgstr ""
+
+#: wpc-product-bundles.php:1365
+msgid "Search by ID"
+msgstr ""
+
+#: wpc-product-bundles.php:1377
+msgid "Search by ID when only entered the numeric."
+msgstr ""
+
+#: wpc-product-bundles.php:1381
+msgid "Search exact"
+msgstr ""
+
+#: wpc-product-bundles.php:1393
+msgid "Match whole product title or content?"
+msgstr ""
+
+#: wpc-product-bundles.php:1397
+msgid "Search sentence"
+msgstr ""
+
+#: wpc-product-bundles.php:1409
+msgid "Do a phrase search?"
+msgstr ""
+
+#: wpc-product-bundles.php:1413
+msgid "Accept same products"
+msgstr ""
+
+#: wpc-product-bundles.php:1425
+msgid "If yes, a product can be added many times."
+msgstr ""
+
+#: wpc-product-bundles.php:1430
+msgid "Advance"
+msgstr ""
+
+#: wpc-product-bundles.php:1434
+#: wpc-product-bundles.php:1494
+msgid "Price sync"
+msgstr ""
+
+#: wpc-product-bundles.php:1446
+msgid "Enable this option to change the bundle price automatically when changing the price of the bundled product. You also can do it by manually on the Tools tab."
+msgstr ""
+
+#: wpc-product-bundles.php:1451
+msgid "Price update"
+msgstr ""
+
+#: wpc-product-bundles.php:1463
+msgid "Enable this option to show the update price tool in each product. Use this tool to update the price for all bundles contain the current product."
+msgstr ""
+
+#: wpc-product-bundles.php:1470
+msgid "Update Options"
+msgstr ""
+
+#: wpc-product-bundles.php:1483
+msgid "Product bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:1488
+msgid "View all product bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:1499
+msgid "Update price for all bundles"
+msgstr ""
+
+#: wpc-product-bundles.php:1502
+msgid "The bundle price will be updated every 5 minutes automatically, you can click to update immediately."
+msgstr ""
+
+#: wpc-product-bundles.php:1532
+msgid "Please select some product options for [name] before adding this bundle to the cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1533
+msgid "Please choose at least one product before adding this bundle to the cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1534
+msgid "Please choose at least [min] in the whole products before adding this bundle to the cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1535
+msgid "Please choose maximum [max] in the whole products before adding this bundle to the cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1589
+msgid "Premium support"
+msgstr ""
+
+#: wpc-product-bundles.php:1715
+msgid "One of the bundled products is unavailable."
+msgstr ""
+
+#: wpc-product-bundles.php:1716
+#: wpc-product-bundles.php:1723
+#: wpc-product-bundles.php:1730
+#: wpc-product-bundles.php:1737
+#: wpc-product-bundles.php:1744
+#: wpc-product-bundles.php:1754
+#: wpc-product-bundles.php:1762
+msgid "You cannot add this bundle to the cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1722
+#: wpc-product-bundles.php:1729
+msgid "\"%s\" is un-purchasable."
+msgstr ""
+
+#: wpc-product-bundles.php:1736
+#: wpc-product-bundles.php:1753
+msgid "\"%s\" has not enough stock."
+msgstr ""
+
+#: wpc-product-bundles.php:1743
+msgid "You cannot add another \"%s\" to your cart."
+msgstr ""
+
+#: wpc-product-bundles.php:1761
+msgid "\"%s\" is protected and cannot be purchased."
+msgstr ""
+
+#: wpc-product-bundles.php:2128
+msgid "(bundled in %s)"
+msgstr ""
+
+#: wpc-product-bundles.php:2238
+msgid "No results found for \"%s\""
+msgstr ""
+
+#: wpc-product-bundles.php:2260
+msgid "Update the price of all bundles containing this product. The completion time for this process depends on the number of bundles you have in your store."
+msgstr ""
+
+#: wpc-product-bundles.php:2263
+msgid "Update Price"
+msgstr ""
+
+#: wpc-product-bundles.php:2267
+msgid "This tool is for updating the price of all bundles containing the modified product. It is invalid for a bundle."
+msgstr ""
+
+#: wpc-product-bundles.php:2270
+msgid "This box content just appears after you publish the product."
+msgstr ""
+
+#: wpc-product-bundles.php:2314
+#: wpc-product-bundles.php:2369
+msgid "Smart bundle"
+msgstr ""
+
+#: wpc-product-bundles.php:2321
+msgid "Bundled Products"
+msgstr ""
+
+#: wpc-product-bundles.php:2402
+msgid "settings"
+msgstr ""
+
+#: wpc-product-bundles.php:2407
+msgid "searching..."
+msgstr ""
+
+#: wpc-product-bundles.php:2409
+msgid "Type any keyword to search"
+msgstr ""
+
+#: wpc-product-bundles.php:2415
+msgid "Selected"
+msgstr ""
+
+#: wpc-product-bundles.php:2444
+msgid "Regular price"
+msgstr ""
+
+#: wpc-product-bundles.php:2450
+msgid "Fixed price"
+msgstr ""
+
+#: wpc-product-bundles.php:2454
+msgid "Disable auto calculate price."
+msgstr ""
+
+#: wpc-product-bundles.php:2454
+msgid "If checked, %s click here to set price %s by manually."
+msgstr ""
+
+#: wpc-product-bundles.php:2458
+msgid "Discount"
+msgstr ""
+
+#: wpc-product-bundles.php:2465
+msgid "% or amount"
+msgstr ""
+
+#: wpc-product-bundles.php:2471
+msgid "If you fill both, the amount will be used."
+msgstr ""
+
+#: wpc-product-bundles.php:2475
+msgid "Custom quantity"
+msgstr ""
+
+#: wpc-product-bundles.php:2479
+msgid "Buyer can change the quantity of bundled products."
+msgstr ""
+
+#: wpc-product-bundles.php:2483
+msgid "Limit of each item"
+msgstr ""
+
+#: wpc-product-bundles.php:2487
+msgid "Use default quantity as min?"
+msgstr ""
+
+#: wpc-product-bundles.php:2499
+msgid "Limit of whole items"
+msgstr ""
+
+#: wpc-product-bundles.php:2512
+msgid "Shipping fee"
+msgstr ""
+
+#: wpc-product-bundles.php:2515
+msgid "Apply to the whole bundle"
+msgstr ""
+
+#: wpc-product-bundles.php:2516
+msgid "Apply to each bundled product"
+msgstr ""
+
+#: wpc-product-bundles.php:2521
+msgid "Manage stock"
+msgstr ""
+
+#: wpc-product-bundles.php:2525
+msgid "Enable stock management at bundle level."
+msgstr ""
+
+#: wpc-product-bundles.php:2527
+msgid "By default, the bundle' stock was calculated automatically from bundled products. After enabling, please press \"Update\" then you can change the stock settings on the \"Inventory\" tab."
+msgstr ""
+
+#: wpc-product-bundles.php:2531
+msgid "Custom display price"
+msgstr ""
+
+#: wpc-product-bundles.php:2584
+msgid "Add"
+msgstr ""
+
+#: wpc-product-bundles.php:2586
+msgid "Remove"
+msgstr ""
+
+#: wpc-product-bundles.php:2591
+msgid "Default quantity"
+msgstr ""
+
+#: wpc-product-bundles.php:2819
+#: wpc-product-bundles.php:2861
+msgid "From"
+msgstr ""
+
+#: wpc-product-bundles.php:3088
+msgid "Choose"
+msgstr ""
+
+#: wpc-product-bundles.php:3094
+msgid "Clear"
+msgstr ""
+
+#: wpc-product-bundles.php:3379
+msgid "Bundle(s) low in stock"
+msgstr ""
+
+#: wpc-product-bundles.php:3384
+msgid "%s is low in stock."
+msgstr ""
+
+#: wpc-product-bundles.php:3387
+msgid "%1$s is low in stock. There are %2$d left."
+msgstr ""
+
+#: wpc-product-bundles.php:3408
+msgid "Bundle (%s)"
+msgstr ""
+
+#: wpc-product-bundles.php:3427
+msgid "Create a Smart bundle"
+msgstr ""
+
+#: wpc-product-bundles.php:3446
+msgid "Added %s product(s) to this bundle."
+msgstr ""
+
+#: wpc-product-bundles.php:3456
+msgid "Bundle(s) out of stock"
+msgstr ""
+
+#: wpc-product-bundles.php:3461
+#: wpc-product-bundles.php:3464
+msgid "%s is out of stock."
+msgstr ""
