@@ -19,13 +19,13 @@
  */
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', "admin_shopikhan-dev" );
+define( 'DB_NAME', 'admin_shopikhan' );
 /** MySQL database username */
-define( 'DB_USER', "admin_shop-usr" );
+define( 'DB_USER', 'admin_shopikhan' );
 /** MySQL database password */
-define( 'DB_PASSWORD', "12345678" );
+define( 'DB_PASSWORD', '$$$SHOp123' );
 /** MySQL hostname */
-define( 'DB_HOST', "localhost:3306" );
+define( 'DB_HOST', 'localhost' );
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
 /** The Database Collate type. Don't change this if in doubt. */
@@ -71,18 +71,14 @@ $table_prefix = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define( 'WP_HOME', 'http://64.227.40.229' );
-define( 'WP_SITEURL', 'http://64.227.40.229' );
-
-define( 'WP_DEBUG_LOG', true );
-
+ 
  define( 'WP_MEMORY_LIMIT', '256M' );
-define( "WP_DEBUG", true );
+define( "WP_DEBUG", false );
 /* define('FS_METHOD','direct'); */
 /* That's all, stop editing! Happy publishing. */
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-    define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
