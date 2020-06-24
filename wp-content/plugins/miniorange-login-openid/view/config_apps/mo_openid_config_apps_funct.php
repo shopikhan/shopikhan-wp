@@ -1,11 +1,11 @@
 <?php
 //to save positions of apps in DB
 function mo_openid_sso_sort_action(){
-    $nonce = $_POST['mo_openid_sso_sort_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_sso_sort_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-sso-sort')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
-        $app_sequence=$_POST['sequence'];
+        $app_sequence=array_map( 'sanitize_text_field', $_POST['sequence']);
         $app_pos='';
         $flag=0;
         foreach ($app_sequence as $app_position) {
@@ -24,15 +24,15 @@ function mo_openid_sso_sort_action(){
 //To enable and disable apps
 function mo_openid_sso_enable_app()
 {
-    $nonce = $_POST['mo_openid_sso_enable_app_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_sso_enable_app_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-sso-enable-app')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
-        $enable_app = $_POST['enabled'];
+        $enable_app = sanitize_text_field($_POST['enabled']);
         if ($enable_app == "true") {
-            update_option('mo_openid_' . $_POST['app_name'] . '_enable', 1);
+            update_option('mo_openid_' . sanitize_text_field($_POST['app_name']) . '_enable', 1);
         } else if ($enable_app == "false") {
-            update_option('mo_openid_' . $_POST['app_name'] . '_enable', 0);
+            update_option('mo_openid_' . sanitize_text_field($_POST['app_name']) . '_enable', 0);
         }
     }
 }
@@ -40,11 +40,11 @@ function mo_openid_sso_enable_app()
 //to load instructions of custom app
 function mo_openid_app_instructions_action()
 {
-    $nonce = $_POST['mo_openid_app_instructions_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_app_instructions_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-app-instructions')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
-        $social_app = $_POST['app_name'];
+        $social_app = sanitize_text_field($_POST['app_name']);
         $instructions = plugin_url . $social_app . ".png##";
         $appslist = maybe_unserialize(get_option('mo_openid_apps_list'));
         if ($appslist != "") {
@@ -72,10 +72,10 @@ function mo_openid_app_instructions_action()
         $name=substr($name,0,strlen($name)-1).'//social_apps//'.$social_app.'.php';
         require($name);
         $social_app = new $social_app();
-        if(!isset($appslist[$_POST['app_name']]['scope']))
+        if(!isset($appslist[sanitize_text_field($_POST['app_name'])]['scope']))
             $instructions .= $social_app->scope . "##";
         else
-            $instructions .= $appslist[$_POST['app_name']]['scope'] . "##";
+            $instructions .= $appslist[sanitize_text_field($_POST['app_name'])]['scope'] . "##";
         if(isset($social_app->video_url))
             $instructions .= $social_app->video_url . "##";
         else
@@ -87,7 +87,7 @@ function mo_openid_app_instructions_action()
 
 function mo_openid_capp_details_action()
 {
-    $nonce = $_POST['mo_openid_capp_details_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_capp_details_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-capp-details')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
@@ -146,7 +146,7 @@ function mo_openid_capp_delete(){
 }
 
 function mo_disable_app(){
-    $appname = $_POST['app_name'];
+    $appname = sanitize_text_field($_POST['app_name']);
     update_option('mo_openid_enable_custom_app_'.$appname,0);
     update_option('mo_openid_'.$appname.'_enable',0);
 }
@@ -163,9 +163,9 @@ function attribute_url(){
 function custom_app_enable_change_update()
 {
     $appname = stripslashes(sanitize_text_field($_POST['appname']));
-    if ($_POST['custom_app_enable_change']) {   //set default app
+    if (sanitize_text_field($_POST['custom_app_enable_change'])) {   //set default app
         if (mo_openid_is_customer_registered()) {
-            update_option('mo_openid_' . $appname . '_enable', $_POST['custom_app_enable_change']);
+            update_option('mo_openid_' . $appname . '_enable', sanitize_text_field($_POST['custom_app_enable_change']));
             update_option('mo_openid_enable_custom_app_' . $appname, 0);
             wp_send_json(["status" => 'true']);
         } else

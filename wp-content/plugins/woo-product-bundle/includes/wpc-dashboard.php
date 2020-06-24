@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 if ( ! class_exists( 'WPCleverDashboard' ) ) {
 	class WPCleverDashboard {
 		function __construct() {
@@ -50,7 +52,7 @@ if ( ! class_exists( 'WPCleverDashboard' ) ) {
 				array_multisort( array_column( $plugins_arr, 'active_installs' ), SORT_DESC, $plugins_arr );
 				$i = 1;
 				foreach ( $plugins_arr as $pl ) {
-					echo '<div class="item"><a href="https://wordpress.org/plugins/' . $pl['slug'] . '/"><span class="num">'. $i .'</span><span class="title">' . $pl['name'] . '</span><br/><span class="info">Version ' . $pl['version'] . '</span></a></div>';
+					echo '<div class="item"><a href="https://wordpress.org/plugins/' . $pl['slug'] . '/"><span class="num">' . $i . '</span><span class="title">' . $pl['name'] . '</span><br/><span class="info">Version ' . $pl['version'] . '</span></a></div>';
 					$i ++;
 				}
 			} else {

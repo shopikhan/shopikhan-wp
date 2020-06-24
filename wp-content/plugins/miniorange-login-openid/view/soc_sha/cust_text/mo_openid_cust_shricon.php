@@ -1,8 +1,8 @@
 <?php
 function mo_openid_customize_icons(){
-    $url_uu = site_url().'/wp-content/plugins/miniorange-login-openid/includes/css/mo-font-awesome.css';
+    wp_enqueue_style( 'mo-openid-share-font-awesome',plugins_url('includes/css/mo-font-awesome.css', __FILE__), false );
     ?>
-    <link rel="stylesheet" type="text/css" href=<?php echo $url_uu;?>>
+<!--    <link rel="stylesheet" type="text/css">-->
     <form id="customize_text" name="customize_text" method="post" action="">
     <input type="hidden" name="option" value="mo_openid_enable_customize_text" />
     <input type="hidden" name="mo_openid_enable_customize_text_nonce"

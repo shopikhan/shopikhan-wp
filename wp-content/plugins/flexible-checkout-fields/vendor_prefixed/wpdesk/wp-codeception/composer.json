@@ -29,7 +29,8 @@
         "codeception\/module-rest": "^1.2",
         "codeception\/module-phpbrowser": "^1.0",
         "codeception\/module-asserts": "^1.1",
-        "codeception\/util-universalframework": "^1.0"
+        "codeception\/util-universalframework": "^1.0",
+        "vlucas\/phpdotenv": "^4.1"
     },
     "require-dev": {
         "phpunit\/phpunit": "<7",

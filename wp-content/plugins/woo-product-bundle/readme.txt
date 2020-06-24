@@ -3,7 +3,7 @@ Contributors: wpclever
 Donate link: https://wpclever.net
 Tags: woocommerce, woo, product, bundle, bundles, product bundle, product bundles, wpc
 Requires at least: 4.0
-Tested up to: 5.4
+Tested up to: 5.4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,28 +20,29 @@ Visit our [live demo](https://demo.wpclever.net/woosb/ "live demo") here to see 
 
 = Features =
 
-<ul>
-<li>General: choose a universal displaying style of prices on your site</li>
-<li>Drag & drop to rearrange bundled product order</li>
-<li>Set a default quantity for each item in a bundle</li>
-<li>Customizable bundled items’ quantity</li>
-<li>Set discount by percentage or by numbers</li>
-<li>Set the min/ max quantity for each item or the whole bundle</li>
-<li>Auto-calculated options for regular & sale prices</li>
-<li>Create virtual or downloadable product bundles</li>
-<li>Add a variable product or a specific variation of a product to a bundle</li>
-<li>Manage stocks at the bundle level</li>
-<li>Product bundle details: configure the information display of bundled products, such as position, thumbnail, price, image, quantity, and short descriptions</li>
-<li>Bundles: change the position of bundle list (above/ below Add to Cart button, hide or open in a new tab)</li>
-<li>Add to Cart & Checkout button texts</li>
-<li>Advanced Search: adjust search product limit, search items by SKU, exact keyword, phrase search, and repeated products</li>
-<li>Price sync & update buttons</li>
-<li>WPML integration for building multilingual sites</li>
-</ul>
+- General: choose a universal displaying style of prices on your site
+- Drag & drop to rearrange bundled product order
+- Set a default quantity for each item in a bundle
+- Customizable bundled items’ quantity
+- Set discount by percentage or by numbers
+- Set the min/ max quantity for each item or the whole bundle
+- Auto-calculated options for regular & sale prices
+- Create virtual or downloadable product bundles
+- Bundled products are inventory-managed just like standalone sales
+- Enable/ disable stock management at bundle level
+- Product bundle details: configure the information display of bundled products, such as position, thumbnail, price, image, quantity, and short descriptions
+- Bundles: change the position of bundle list (above/ below Add to Cart button, hide or open in a new tab)
+- Add to Cart & Checkout button texts
+- Advanced Search: adjust search product limit, search items by SKU, exact keyword, phrase search, and repeated products
+- WPML integration for building multilingual sites
+
+= Premium Version =
+
+- Add a **variable product** or a **specific variation** to a bundle
 
 = Translators =
 
-Available languages: English (Default), German, French, Norwegian, Romanian, Danish, Vietnamese
+Available languages: English (Default), German, French, Norwegian, Romanian, Danish, Vietnamese, Spanish, Italian
 
 If you have created your own language pack, or have an update for an existing one, you can send [gettext PO and MO file](http://codex.wordpress.org/Translating_WordPress "Translating WordPress") to [us](https://wpclever.net/contact?utm_source=pot&utm_medium=woosb&utm_campaign=wporg "WPClever.net") so we can bundle it into WPC Product Bundles.
 
@@ -53,6 +54,11 @@ Please try other plugins from us:
 - [WPC Grouped Product](https://wordpress.org/plugins/wpc-grouped-product/ "WPC Grouped Product")
 - [WPC Frequently Bought Together](https://wordpress.org/plugins/woo-bought-together/ "WPC Frequently Bought Together")
 - [WPC Force Sells](https://wordpress.org/plugins/wpc-force-sells/ "WPC Force Sells")
+
+= Compatible =
+
+- [Appmaker](https://wordpress.org/plugins/appmaker-woocommerce-mobile-app-manager/ "Appmaker") – Convert WooCommerce to Android & iOS Native Mobile Apps
+- [Fish and Ships for WooCommerce](https://wordpress.org/plugins/fish-and-ships/ "Fish and Ships for WooCommerce"), a conditional table rate shipping cost
 
 = Suggestions =
 
@@ -71,6 +77,46 @@ If you love our plugins, please give us a full five-star rating so that we know 
 5. Almost done! click Save and see the result
 
 == Changelog ==
+
+= 5.2.2 =
+* Fixed: Error on checkout page
+
+= 5.2.1 =
+* Fixed: Wrong bundled product's quantity
+
+= 5.2.0 =
+* Updated: Compatible with WooCommerce 4.2.0
+* Added: Plus/minus button for quantity input
+* Added: Link to individual product on the thumbnail
+
+= 5.1.3 =
+* Added: Italian translation (Thanks to Massimo Albanesi)
+* Fixed: Compatible with WPC Ajax Add to Cart
+* Fixed: Some minor CSS & JS issues
+
+= 5.1.2 =
+* Fixed: Compatible with WPC Variations Radio Buttons
+* Fixed: Plus/minus button for decimal quantity
+* Fixed: Permission to use bulk actions
+
+= 5.1.1 = 
+* Added: Spanish translation (Thanks to Ramón Perez Sil)
+* Added: Shortcode [woosb_form]
+
+= 5.1.0 =
+* Added: Bundled pricing methods: from Sale price (default) or Regular price
+* Added: Compatible options for WooCommerce PDF Invoices & Packing Slips
+* Added: Compatible options for WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels
+* Optimized the code
+
+= 5.0.1 =
+* Fixed: Have a bit different in the total price on the cart
+* Optimized the code
+
+= 5.0.0 =
+* Note: PLEASE CONSIDER BEFORE UPDATING THIS VERSION
+* Removed: Limits 3 products in a bundle
+* Updated: Variable or variation product only available on the Premium Version
 
 = 4.0.4 =
 * Added: Danish translation (thanks to Flemming)

@@ -8,188 +8,62 @@ jQuery(document).ready(function($) {
   }
 
   $('.woosb-wrap').each(function() {
-    woosb_init($(this).closest(woosb_vars.wrap_selector));
+    woosb_init($(this));
   });
 });
 
-jQuery(document).on('click touch', '.woosb-plus, .woosb-minus', function() {
-  // get values
-  var $number = jQuery(this).closest('.woosb-qty').find('.qty'),
-      number_val = parseFloat($number.val()),
-      max = parseFloat($number.attr('max')),
-      min = parseFloat($number.attr('min')),
-      step = $number.attr('step');
+jQuery(document).
+    on('click touch', '.woosb-qty-input-plus, .woosb-qty-input-minus',
+        function() {
+          // get values
+          var $qty = jQuery(this).closest('.woosb-qty-input').find('.qty'),
+              val = parseFloat($qty.val()),
+              max = parseFloat($qty.attr('max')),
+              min = parseFloat($qty.attr('min')),
+              step = $qty.attr('step');
 
-  // format values
-  if (!number_val || number_val === '' || number_val === 'NaN') {
-    number_val = 0;
-  }
+          // format values
+          if (!val || val === '' || val === 'NaN') {
+            val = 0;
+          }
 
-  if (max === '' || max === 'NaN') {
-    max = '';
-  }
+          if (max === '' || max === 'NaN') {
+            max = '';
+          }
 
-  if (min === '' || min === 'NaN') {
-    min = 0;
-  }
+          if (min === '' || min === 'NaN') {
+            min = 0;
+          }
 
-  if (step === 'any' || step === '' || step === undefined ||
-      parseFloat(step) === 'NaN') {
-    step = 1;
-  }
+          if (step === 'any' || step === '' || step === undefined ||
+              parseFloat(step) === 'NaN') {
+            step = 1;
+          } else {
+            step = parseFloat(step);
+          }
 
-  // change the value
-  if (jQuery(this).is('.woosb-plus')) {
-    if (max && (
-        max == number_val || number_val > max
-    )) {
-      $number.val(max);
-    } else {
-      if (woosb_is_int(step)) {
-        $number.val(number_val + parseFloat(step));
-      } else {
-        $number.val((
-            number_val + parseFloat(step)
-        ).toFixed(1));
-      }
-    }
-  } else {
-    if (min && (
-        min == number_val || number_val < min
-    )) {
-      $number.val(min);
-    } else if (number_val > 0) {
-      if (woosb_is_int(step)) {
-        $number.val(number_val - parseFloat(step));
-      } else {
-        $number.val((
-            number_val - parseFloat(step)
-        ).toFixed(1));
-      }
-    }
-  }
+          // change the value
+          if (jQuery(this).is('.woosb-qty-input-plus')) {
+            if (max && (
+                max == val || val > max
+            )) {
+              $qty.val(max);
+            } else {
+              $qty.val((val + step).toFixed(woosb_decimal_places(step)));
+            }
+          } else {
+            if (min && (
+                min == val || val < min
+            )) {
+              $qty.val(min);
+            } else if (val > 0) {
+              $qty.val((val - step).toFixed(woosb_decimal_places(step)));
+            }
+          }
 
-  // trigger change event
-  $number.trigger('change');
-});
-
-jQuery(document).on('found_variation', function(e, t) {
-  var $woosb_wrap = jQuery(e['target']).closest(woosb_vars.wrap_selector);
-  var $woosb_products = jQuery(e['target']).closest('.woosb-products');
-  var $woosb_product = jQuery(e['target']).closest('.woosb-product');
-
-  if ($woosb_product.length) {
-    if (t['image']['url'] !== undefined && t['image']['srcset'] !== undefined) {
-      // change image
-      $woosb_product.find('.woosb-thumb-ori').hide();
-      $woosb_product.find('.woosb-thumb-new').
-          html('<img src="' + t['image']['url'] + '" srcset="' +
-              t['image']['srcset'] + '"/>').
-          show();
-    }
-
-    if (t['price_html'] !== undefined && t['display_price'] !== undefined) {
-      // change price
-      $woosb_product.find('.woosb-price-ori').hide();
-
-      // calculate new price
-      if (woosb_vars.bundled_price === 'subtotal') {
-        var ori_price = parseFloat(t['display_price']) *
-            parseFloat($woosb_product.attr('data-qty'));
-        var new_price = ori_price;
-
-        if (parseFloat($woosb_products.attr('data-discount')) > 0) {
-          new_price = ori_price *
-              (100 - parseFloat($woosb_products.attr('data-discount'))) / 100;
-        }
-
-        $woosb_product.find('.woosb-price-new').
-            html(woosb_price_html(ori_price, new_price)).show();
-      } else {
-        if (parseFloat($woosb_products.attr('data-discount')) > 0) {
-          var ori_price = parseFloat(t['display_price']);
-          var new_price = ori_price *
-              (100 - parseFloat($woosb_products.attr('data-discount'))) / 100;
-          $woosb_product.find('.woosb-price-new').
-              html(woosb_price_html(ori_price, new_price)).show();
-        } else {
-          $woosb_product.find('.woosb-price-new').html(t['price_html']).show();
-        }
-      }
-    }
-
-    if (t['variation_description'] !== undefined) {
-      $woosb_product.find('.woosb-variation-description').
-          html(t['variation_description']).
-          show();
-    } else {
-      $woosb_product.find('.woosb-variation-description').html('').hide();
-    }
-
-    if (t['is_purchasable']) {
-      // change the price
-      $woosb_product.attr('data-price', t['display_price']);
-
-      // change stock notice
-      if (t['is_in_stock']) {
-        $woosb_products.next('p.stock').show();
-        $woosb_product.attr('data-id', t['variation_id']);
-      } else {
-        $woosb_products.next('p.stock').hide();
-        $woosb_product.attr('data-id', 0);
-      }
-
-      // change availability text
-      jQuery(e['target']).closest('.variations_form').find('p.stock').remove();
-
-      if (t['availability_html'] !== '') {
-        jQuery(e['target']).
-            closest('.variations_form').
-            append(t['availability_html']);
-      }
-    }
-
-    if (woosb_vars.change_image === 'no') {
-      // prevent changing the main image
-      jQuery(e['target']).closest('.variations_form').trigger('reset_image');
-    }
-
-    jQuery(document).trigger('woosb_found_variation', [$woosb_product, t]);
-
-    woosb_init($woosb_wrap);
-  }
-});
-
-jQuery(document).on('reset_data', function(e) {
-  var $woosb_wrap = jQuery(e['target']).closest(woosb_vars.wrap_selector);
-  var $woosb_product = jQuery(e['target']).closest('.woosb-product');
-
-  if ($woosb_product.length) {
-    // reset thumb
-    $woosb_product.find('.woosb-thumb-new').hide();
-    $woosb_product.find('.woosb-thumb-ori').show();
-
-    // reset price
-    $woosb_product.find('.woosb-price-new').hide();
-    $woosb_product.find('.woosb-price-ori').show();
-
-    // reset stock
-    jQuery(e['target']).closest('.variations_form').find('p.stock').remove();
-
-    // reset desc
-    $woosb_product.find('.woosb-variation-description').html('').hide();
-
-    // reset id
-    $woosb_product.attr('data-id', 0);
-
-    // reset price
-    $woosb_product.attr('data-price', 0);
-
-    jQuery(document).trigger('woosb_reset_data', [$woosb_product]);
-
-    woosb_init($woosb_wrap);
-  }
-});
+          // trigger change event
+          $qty.trigger('change');
+        });
 
 jQuery(document).on('click touch', '.single_add_to_cart_button', function(e) {
   var $this = jQuery(this);
@@ -201,69 +75,54 @@ jQuery(document).on('click touch', '.single_add_to_cart_button', function(e) {
 
 jQuery(document).on('change', '.woosb-qty .qty', function() {
   var $this = jQuery(this);
+
   woosb_check_qty($this);
 });
 
 jQuery(document).on('keyup', '.woosb-qty .qty', function() {
   var $this = jQuery(this);
+
   if (woosb_timeout != null) clearTimeout(woosb_timeout);
   woosb_timeout = setTimeout(woosb_check_qty, 1000, $this);
 });
 
 jQuery(document).on('woosq_loaded', function() {
   // product bundles in quick view popup
-  woosb_init(jQuery('#woosq-popup .product-type-woosb'));
+  woosb_init(jQuery('#woosq-popup .woosb-wrap'));
 });
 
-jQuery(document).on('woovr_selected', function(e, selected, variations) {
-  var $woosb_wrap = variations.closest(woosb_vars.wrap_selector);
-  var $woosb_product = variations.closest('.woosb-product');
+function woosb_init($wrap) {
+  var wrap_id = $wrap.attr('data-id');
+  var container = woosb_container(wrap_id);
+  var $container = $wrap.closest(container);
 
-  if ($woosb_product.length) {
-    var _id = selected.attr('data-id');
-    var _price = selected.attr('data-price');
-    var _purchasable = selected.attr('data-purchasable');
-
-    if (_purchasable === 'yes') {
-      $woosb_product.attr('data-id', _id);
-      $woosb_product.attr('data-price', _price);
-    } else {
-      $woosb_product.attr('data-id', 0);
-      $woosb_product.attr('data-price', 0);
-    }
-  }
-
-  woosb_init($woosb_wrap);
-});
-
-function woosb_init($woosb_wrap) {
-  woosb_check_ready($woosb_wrap);
-  woosb_calc_price($woosb_wrap);
-  woosb_save_ids($woosb_wrap);
+  woosb_check_ready($container);
+  woosb_calc_price($container);
+  woosb_save_ids($container);
 }
 
-function woosb_check_ready($woosb_wrap) {
+function woosb_check_ready($container) {
   var total = 0;
   var selection_name = '';
   var is_selection = false;
   var is_empty = true;
   var is_min = false;
   var is_max = false;
-
-  var $woosb_products = $woosb_wrap.find('.woosb-products');
-  var $woosb_btn = $woosb_wrap.find('.single_add_to_cart_button');
+  var $products = $container.find('.woosb-products');
+  var $alert = $container.find('.woosb-alert');
+  var $btn = $container.find('.single_add_to_cart_button');
 
   // remove ajax add to cart
-  $woosb_btn.removeClass('ajax_add_to_cart');
+  $btn.removeClass('ajax_add_to_cart');
 
-  if (!$woosb_products.length ||
-      (($woosb_products.attr('data-variables') === 'no') &&
-          ($woosb_products.attr('data-optional') === 'no'))) {
+  if (!$products.length ||
+      (($products.attr('data-variables') === 'no') &&
+          ($products.attr('data-optional') === 'no'))) {
     // don't need to do anything
     return;
   }
 
-  $woosb_products.find('.woosb-product').each(function() {
+  $products.find('.woosb-product').each(function() {
     var $this = jQuery(this);
 
     if ((
@@ -272,6 +131,7 @@ function woosb_check_ready($woosb_wrap) {
         parseInt($this.attr('data-id')) === 0
     )) {
       is_selection = true;
+
       if (selection_name === '') {
         selection_name = $this.attr('data-name');
       }
@@ -285,27 +145,27 @@ function woosb_check_ready($woosb_wrap) {
 
   // check min
   if ((
-      $woosb_products.attr('data-optional') === 'yes'
-  ) && $woosb_products.attr('data-min') && (
-      total < parseFloat($woosb_products.attr('data-min'))
+      $products.attr('data-optional') === 'yes'
+  ) && $products.attr('data-min') && (
+      total < parseFloat($products.attr('data-min'))
   )) {
     is_min = true;
   }
 
   // check max
   if ((
-      $woosb_products.attr('data-optional') === 'yes'
-  ) && $woosb_products.attr('data-max') && (
-      total > parseFloat($woosb_products.attr('data-max'))
+      $products.attr('data-optional') === 'yes'
+  ) && $products.attr('data-max') && (
+      total > parseFloat($products.attr('data-max'))
   )) {
     is_max = true;
   }
 
   if (is_selection || is_empty || is_min || is_max) {
-    $woosb_btn.addClass('woosb-disabled');
+    $btn.addClass('woosb-disabled disabled');
 
     if (is_selection) {
-      jQuery('.woosb-alert').
+      $alert.
           html(woosb_vars.alert_selection.replace('[name]',
               '<strong>' + selection_name + '</strong>')).
           slideDown();
@@ -313,121 +173,63 @@ function woosb_check_ready($woosb_wrap) {
     }
 
     if (is_empty) {
-      jQuery('.woosb-alert').html(woosb_vars.alert_empty).slideDown();
+      $alert.html(woosb_vars.alert_empty).slideDown();
       return;
     }
 
     if (is_min) {
-      jQuery('.woosb-alert').html(woosb_vars.alert_min.replace('[min]',
-          $woosb_products.attr('data-min'))).slideDown();
+      $alert.html(woosb_vars.alert_min.replace('[min]',
+          $products.attr('data-min'))).slideDown();
       return;
     }
 
     if (is_max) {
-      jQuery('.woosb-alert').html(woosb_vars.alert_max.replace('[max]',
-          $woosb_products.attr('data-max'))).slideDown();
+      $alert.html(woosb_vars.alert_max.replace('[max]',
+          $products.attr('data-max'))).slideDown();
     }
   } else {
-    jQuery('.woosb-alert').html('').slideUp();
-    $woosb_btn.removeClass('woosb-disabled');
+    $alert.html('').slideUp();
+    $btn.removeClass('woosb-disabled disabled');
   }
 }
 
-function woosb_check_qty($woosb_qty) {
-  var $woosb_wrap = $woosb_qty.closest(woosb_vars.wrap_selector);
-  var qty = parseFloat($woosb_qty.val());
-  var min_qty = parseFloat($woosb_qty.attr('min'));
-  var max_qty = parseFloat($woosb_qty.attr('max'));
-
-  if ((qty === '') || isNaN(qty)) {
-    qty = 0;
-  }
-
-  if (!isNaN(min_qty) && (
-      qty < min_qty
-  )) {
-    qty = min_qty;
-  }
-
-  if (!isNaN(max_qty) && (
-      qty > max_qty
-  )) {
-    qty = max_qty;
-  }
-
-  $woosb_qty.val(qty);
-  $woosb_qty.closest('.woosb-product').attr('data-qty', qty);
-
-  // change subtotal
-  if (woosb_vars.bundled_price === 'subtotal') {
-    var $woosb_products = $woosb_wrap.find('.woosb-products');
-    var $woosb_product = $woosb_qty.closest('.woosb-product');
-    var ori_price = parseFloat($woosb_product.attr('data-price')) *
-        parseFloat($woosb_product.attr('data-qty'));
-
-    $woosb_product.find('.woosb-price-ori').hide();
-
-    if (parseFloat($woosb_products.attr('data-discount')) > 0 &&
-        $woosb_products.attr('data-fixed-price') === 'no') {
-      var new_price = ori_price *
-          (100 - parseFloat($woosb_products.attr('data-discount'))) / 100;
-
-      $woosb_product.find('.woosb-price-new').
-          html(woosb_price_html(ori_price, new_price)).show();
-    } else {
-      $woosb_product.find('.woosb-price-new').
-          html(woosb_price_html(ori_price)).
-          show();
-    }
-  }
-
-  woosb_init($woosb_wrap);
-}
-
-function woosb_calc_price($woosb_wrap) {
+function woosb_calc_price($container) {
   var total = 0;
   var total_sale = 0;
-  var $woosb_products = $woosb_wrap.find('.woosb-products');
-  var $woosb_total = $woosb_wrap.find('.woosb-total');
-  var $woobt_wrap = jQuery('.woobt-wrap').eq(0);
+  var $products = $container.find('.woosb-products');
+  var $total = $container.find('.woosb-total');
+  var $wrap_woobt = $container.find('.woobt-wrap');
   var total_woobt = parseFloat(
-      $woobt_wrap.length ? $woobt_wrap.attr('data-total') : 0);
+      $wrap_woobt.length ? $wrap_woobt.attr('data-total') : 0);
+  var _discount = parseFloat($products.attr('data-discount'));
+  var _discount_amount = parseFloat(
+      $products.attr('data-discount-amount'));
+  var _saved = '';
+  var _fix = Math.pow(10, Number(woosb_vars.price_decimals) + 1);
+  var is_discount = _discount > 0 && _discount < 100;
+  var is_discount_amount = _discount_amount > 0;
 
-  $woosb_products.find('.woosb-product').each(function() {
+  $products.find('.woosb-product').each(function() {
     var $this = jQuery(this);
     if (parseFloat($this.attr('data-price')) > 0) {
-      total += parseFloat($this.attr('data-price')) *
+      var this_price = parseFloat($this.attr('data-price')) *
           parseFloat($this.attr('data-qty'));
+      total += this_price;
+      if (!is_discount_amount && is_discount) {
+        this_price *= (100 - _discount) / 100;
+        this_price = Math.round(this_price * _fix) / _fix;
+      }
+      total_sale += this_price;
     }
   });
 
   // fix js number https://www.w3schools.com/js/js_numbers.asp
   total = woosb_round(total, woosb_vars.price_decimals);
 
-  var _discount = parseFloat($woosb_products.attr('data-discount'));
-  var _discount_amount = parseFloat(
-      $woosb_products.attr('data-discount-amount'));
-  var _saved = '';
-
-  if ((
-      _discount_amount > 0
-  ) && (
-      _discount_amount < total
-  )) {
+  if (is_discount_amount && _discount_amount < total) {
     total_sale = total - _discount_amount;
     _saved = woosb_format_price(_discount_amount);
-  } else if ((
-      _discount > 0
-  ) && (
-      _discount < 100
-  )) {
-    total_sale = total * (
-        100 - _discount
-    ) / 100;
-    // round number again
-    var _fix = Math.pow(10, Number(woosb_vars.price_decimals) + 1);
-
-    total_sale = Math.round(total_sale * _fix) / _fix;
+  } else if (is_discount) {
     _saved = woosb_round(_discount, 2) + '%';
   } else {
     total_sale = total;
@@ -451,42 +253,42 @@ function woosb_calc_price($woosb_wrap) {
   }
 
   // change the bundle total
-  $woosb_total.html(woosb_vars.price_text + ' ' + total_html).slideDown();
+  $total.html(woosb_vars.price_text + ' ' + total_html).slideDown();
 
   if ((
       woosb_vars.change_price !== 'no'
   ) && (
-      $woosb_products.attr('data-fixed-price') === 'no'
+      $products.attr('data-fixed-price') === 'no'
   ) && (
       (
-          $woosb_products.attr('data-variables') === 'yes'
+          $products.attr('data-variables') === 'yes'
       ) || (
-          $woosb_products.attr('data-optional') === 'yes'
+          $products.attr('data-optional') === 'yes'
       )
   )) {
     // change the main price
-    if ($woobt_wrap.length) {
+    if ($wrap_woobt.length) {
       // check if has woobt
-      $woosb_wrap.find(price_selector).html(total_all_html);
+      $container.find(price_selector).html(total_all_html);
     } else {
-      $woosb_wrap.find(price_selector).html(total_html);
+      $container.find(price_selector).html(total_html);
     }
   }
 
-  if ($woobt_wrap.length) {
+  if ($wrap_woobt.length) {
     // check if has woobt
-    $woobt_wrap.find('.woobt-products').attr('data-product-price', total_sale);
+    $wrap_woobt.find('.woobt-products').attr('data-product-price', total_sale);
   }
 
   jQuery(document).trigger('woosb_calc_price', [total_sale, total, total_html]);
 }
 
-function woosb_save_ids($woosb_wrap) {
-  var woosb_ids = Array();
-  var $woosb_products = $woosb_wrap.find('.woosb-products');
-  var $woosb_ids = $woosb_wrap.find('.woosb-ids');
+function woosb_save_ids($wrap) {
+  var ids = Array();
+  var $ids = $wrap.find('.woosb-ids');
+  var $products = $wrap.find('.woosb-products');
 
-  $woosb_products.find('.woosb-product').each(function() {
+  $products.find('.woosb-product').each(function() {
     var $this = jQuery(this);
 
     if ((
@@ -494,13 +296,124 @@ function woosb_save_ids($woosb_wrap) {
     ) && (
         parseFloat($this.attr('data-qty')) > 0
     )) {
-      woosb_ids.push($this.attr('data-id') + '/' + $this.attr('data-qty'));
+      ids.push($this.attr('data-id') + '/' + $this.attr('data-qty'));
     }
   });
 
-  $woosb_ids.val(woosb_ids.join(','));
+  $ids.val(ids.join(','));
 
-  jQuery(document).trigger('woosb_save_ids', [woosb_ids]);
+  jQuery(document).trigger('woosb_save_ids', [ids]);
+}
+
+function woosb_check_qty($qty) {
+  var $wrap = $qty.closest('.woosb-wrap');
+  var qty = parseFloat($qty.val());
+  var min = parseFloat($qty.attr('min'));
+  var max = parseFloat($qty.attr('max'));
+
+  if ((qty === '') || isNaN(qty)) {
+    qty = 0;
+  }
+
+  if (!isNaN(min) && (
+      qty < min
+  )) {
+    qty = min;
+  }
+
+  if (!isNaN(max) && (
+      qty > max
+  )) {
+    qty = max;
+  }
+
+  $qty.val(qty);
+  $qty.closest('.woosb-product').attr('data-qty', qty);
+
+  // change subtotal
+  if (woosb_vars.bundled_price === 'subtotal') {
+    var $products = $wrap.find('.woosb-products');
+    var $product = $qty.closest('.woosb-product');
+    var ori_price = parseFloat($product.attr('data-price')) *
+        parseFloat($product.attr('data-qty'));
+
+    $product.find('.woosb-price-ori').hide();
+
+    if (parseFloat($products.attr('data-discount')) > 0 &&
+        $products.attr('data-fixed-price') === 'no') {
+      var new_price = ori_price *
+          (100 - parseFloat($products.attr('data-discount'))) / 100;
+
+      $product.find('.woosb-price-new').
+          html(woosb_price_html(ori_price, new_price)).show();
+    } else {
+      $product.find('.woosb-price-new').
+          html(woosb_price_html(ori_price)).
+          show();
+    }
+  }
+
+  woosb_init($wrap);
+}
+
+function woosb_change_price($product, price, regular_price, price_html) {
+  var $products = $product.closest('.woosb-products');
+
+  // hide ori price
+  $product.find('.woosb-price-ori').hide();
+
+  // calculate new price
+  if (woosb_vars.bundled_price === 'subtotal') {
+    var ori_price = parseFloat(price) *
+        parseFloat($product.attr('data-qty'));
+
+    if (woosb_vars.bundled_price_from === 'regular_price' &&
+        regular_price !== undefined) {
+      ori_price = parseFloat(regular_price) *
+          parseFloat($product.attr('data-qty'));
+    }
+
+    var new_price = ori_price;
+
+    if (parseFloat($products.attr('data-discount')) > 0) {
+      new_price = ori_price *
+          (100 - parseFloat($products.attr('data-discount'))) / 100;
+    }
+
+    $product.find('.woosb-price-new').
+        html(woosb_price_html(ori_price, new_price)).show();
+  } else {
+    if (parseFloat($products.attr('data-discount')) > 0) {
+      var ori_price = parseFloat(price);
+
+      if (woosb_vars.bundled_price_from === 'regular_price' &&
+          regular_price !== undefined) {
+        ori_price = parseFloat(regular_price);
+      }
+
+      var new_price = ori_price *
+          (100 - parseFloat($products.attr('data-discount'))) / 100;
+      $product.find('.woosb-price-new').
+          html(woosb_price_html(ori_price, new_price)).show();
+    } else {
+      if (price_html !== '') {
+        $product.find('.woosb-price-new').
+            html(price_html).
+            show();
+      } else {
+        var ori_price = parseFloat(price);
+
+        if (woosb_vars.bundled_price_from === 'regular_price' &&
+            regular_price !== undefined) {
+          ori_price = parseFloat(regular_price);
+        }
+
+        $product.find('.woosb-price-new').
+            html(woosb_price_html(ori_price, ori_price)).
+            show();
+      }
+    }
+  }
 }
 
 function woosb_round(value, decimals) {
@@ -586,6 +499,33 @@ function woosb_price_html(regular_price, sale_price) {
   return price_html;
 }
 
-function woosb_is_int(n) {
-  return n % 1 === 0;
+function woosb_decimal_places(num) {
+  var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+
+  if (!match) {
+    return 0;
+  }
+
+  return Math.max(
+      0,
+      // Number of digits right of decimal point.
+      (match[1] ? match[1].length : 0)
+      // Adjust for scientific notation.
+      - (match[2] ? +match[2] : 0));
+}
+
+function woosb_container(id) {
+  if (jQuery('.woosb-wrap-' + id).closest('#product-' + id).length) {
+    return '#product-' + id;
+  }
+
+  if (jQuery('.woosb-wrap-' + id).closest('.product.post-' + id).length) {
+    return '.product.post-' + id;
+  }
+
+  if (jQuery('.woosb-wrap-' + id).closest('div.product-type-woosb').length) {
+    return 'div.product-type-woosb';
+  }
+
+  return 'body.single-product';
 }

@@ -62,15 +62,6 @@ class mo_openid_login_wid extends WP_Widget {
 
     public function openidloginForm(){
 
-        if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
-            ?>
-            <script
-                src="https://code.jquery.com/jquery-1.12.4.js"
-                integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
-                crossorigin="anonymous"></script>
-            <?php
-        }
-
         $selected_theme = esc_attr(get_option('mo_openid_login_theme'));
         $appsConfigured = get_option('mo_openid_google_enable') | get_option('mo_openid_salesforce_enable') | get_option('mo_openid_facebook_enable') | get_option('mo_openid_linkedin_enable') | get_option('mo_openid_instagram_enable') | get_option('mo_openid_amazon_enable') | get_option('mo_openid_windowslive_enable') | get_option('mo_openid_twitter_enable') | get_option('mo_openid_vkontakte_enable')| get_option('mo_openid_yahoo_enable');
         $spacebetweenicons = esc_attr(get_option('mo_login_icon_space'));
@@ -882,7 +873,6 @@ class mo_openid_login_wid extends WP_Widget {
                 jQuery(".btn-mo").prop("disabled",false);
             </script>
         <?php }
-        echo '<script src="' . plugins_url( 'includes/js/jquery.cookie.min.js', __FILE__ ) . '" ></script>';
         ?>
         <script type="text/javascript">
             function mo_openid_on_consent_change(checkbox){
@@ -1231,7 +1221,7 @@ function mo_openid_login_validate(){
     if ( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'getmosociallogin' ) !== false ) {
 
         if (isset($_REQUEST['wp_nonce'])) {
-            $nonce = $_REQUEST['wp_nonce'];
+            $nonce = sanitize_text_field($_REQUEST['wp_nonce']);
             if (!wp_verify_nonce($nonce, 'mo-openid-get-social-login-nonce')) {
                 wp_die('<strong>ERROR</strong>: Invalid Request.');
             } else {
@@ -1240,7 +1230,7 @@ function mo_openid_login_validate(){
         }
     }
     else if( isset($_POST['mo_openid_go_back_registration_nonce']) and isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_go_back_registration" ){
-        $nonce = $_POST['mo_openid_go_back_registration_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_go_back_registration_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-go-back-register-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1248,7 +1238,7 @@ function mo_openid_login_validate(){
         }
     }
     else if ( isset($_POST['mo_openid_custom_form_submitted_nonce']) and isset($_POST['username']) and $_POST['option'] == 'mo_openid_custom_form_submitted' ){
-        $nonce = $_POST['mo_openid_custom_form_submitted_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_custom_form_submitted_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-custom-form-submitted-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.' . $nonce);
         } else {
@@ -1260,20 +1250,20 @@ function mo_openid_login_validate(){
                 header("Location:".get_option('profile_completion_page'));
                 exit;
             }
-            $user_picture = $_POST["user_picture"];
-            $user_url = $_POST["user_url"];
-            $last_name = $_POST["last_name"];
-            $username=$_POST["username"];
-            $user_email=$_POST["user_email"];
-            $random_password=$_POST["random_password"];
-            $user_full_name = $_POST["user_full_name"];
-            $first_name = $_POST["first_name"];
-            $decrypted_app_name = $_POST["decrypted_app_name"];
-            $decrypted_user_id = $_POST["decrypted_user_id"];
-            $call = $_POST["call"];
-            $user_profile_url = $_POST["user_profile_url"];
-            $social_app_name = $_POST["social_app_name"];
-            $social_user_id = $_POST["social_user_id"];
+            $user_picture = sanitize_text_field($_POST["user_picture"]);
+            $user_url = sanitize_text_field($_POST["user_url"]);
+            $last_name = sanitize_text_field($_POST["last_name"]);
+            $username=sanitize_text_field($_POST["username"]);
+            $user_email=sanitize_text_field($_POST["user_email"]);
+            $random_password=sanitize_text_field($_POST["random_password"]);
+            $user_full_name = sanitize_text_field($_POST["user_full_name"]);
+            $first_name = sanitize_text_field($_POST["first_name"]);
+            $decrypted_app_name = sanitize_text_field($_POST["decrypted_app_name"]);
+            $decrypted_user_id = sanitize_text_field($_POST["decrypted_user_id"]);
+            $call = sanitize_text_field($_POST["call"]);
+            $user_profile_url = sanitize_text_field($_POST["user_profile_url"]);
+            $social_app_name = sanitize_text_field($_POST["social_app_name"]);
+            $social_user_id = sanitize_text_field($_POST["social_user_id"]);
 
             $userdata = array(
                 'user_login'  => $username,
@@ -1349,7 +1339,7 @@ function mo_openid_login_validate(){
     }
 
     else if(isset($_POST['mo_openid_profile_form_submitted_nonce']) and isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_profile_form_submitted"){
-        $nonce = $_POST['mo_openid_profile_form_submitted_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_profile_form_submitted_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-profile-form-submitted-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.' . $nonce);
         } else {
@@ -1366,7 +1356,7 @@ function mo_openid_login_validate(){
         }
     }
     else if( isset($_POST['mo_openid_go_back_login_nonce']) and isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_go_back_login" ){
-        $nonce = $_POST['mo_openid_go_back_login_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_go_back_login_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-go-back-login-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1379,7 +1369,7 @@ function mo_openid_login_validate(){
         }
     }
     else if(isset($_POST['mo_openid_forgot_password_nonce']) and isset($_POST['option']) and $_POST['option'] == 'mo_openid_forgot_password'){
-        $nonce = $_POST['mo_openid_forgot_password_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_forgot_password_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-forgot-password-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1417,7 +1407,7 @@ function mo_openid_login_validate(){
         }
     }
     else if( isset($_POST['mo_openid_connect_register_nonce']) and isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_register_customer" ) {	//register the admin to miniOrange
-        $nonce = $_POST['mo_openid_connect_register_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_connect_register_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-connect-register-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1429,7 +1419,7 @@ function mo_openid_login_validate(){
         mo_pop_show_verify_password_page();
     }
     else if( isset($_POST['mo_openid_account_linking_nonce']) and isset($_POST['option'] ) and strpos( $_POST['option'], 'mo_openid_account_linking' ) !== false ){
-        $nonce = $_POST['mo_openid_account_linking_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_account_linking_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-account-linking-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1463,7 +1453,7 @@ function mo_openid_login_validate(){
         }
     }
 	else if( isset($_POST['mo_openid_show_profile_form_nonce']) and isset( $_POST['option'] ) and strpos( $_POST['option'], 'mo_openid_show_profile_form' ) !== false ){
-    $nonce = $_POST['mo_openid_show_profile_form_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_show_profile_form_nonce']);
     if ( ! wp_verify_nonce( $nonce, 'mo-openid-user-show-profile-form-nonce' ) ) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
@@ -1484,34 +1474,6 @@ function mo_openid_login_validate(){
     }
 }
 
-    else if( isset( $_POST['option'] ) and strpos( $_POST['option'], 'mo_openid_subscriber_form' ) !== false ){
-        $userid = $_POST["userid"];
-        $user = get_user_by('id', $userid);
-
-        do_action( 'miniorange_collect_attributes_for_authenticated_user', $user, mo_openid_get_redirect_url());
-        if(get_option("mo_openid_user_moderation")==1) {
-            $x = get_user_meta($userid, 'activation_state');
-            if ($x[0] != '1') {
-                do_action('wp_login', $user->user_login, $user);
-            } else {
-                ?>
-                <script>
-                    var pop_up = '<?php echo get_option('mo_openid_popup_window');?>';
-                    if (pop_up== '0') {
-                        alert("Successfully registered! You will get notification after activation of your account.");
-                        window.location = "<?php  echo get_option('siteurl');?>";
-                    } else {
-                        alert("Successfully registered! You will get notification after activation of your account.");
-                        window.close();
-                    }
-                </script>
-                <?php
-                exit();
-            }
-        }else
-            do_action('wp_login', $user->user_login, $user);
-    }
-
     else if((isset($_POST['action'])) && (strpos($_POST['action'], 'delete_social_profile_data') !== false) && isset($_POST['user_id'])){
         // delete first name, last name, user_url and profile_url from usermeta
         $id = sanitize_text_field($_POST['user_id']);
@@ -1519,7 +1481,7 @@ function mo_openid_login_validate(){
     }
     else if ( isset( $_REQUEST['option'] ) and strpos( $_REQUEST['option'], 'oauthredirect' ) !== false ) {
         if(isset($_REQUEST['wp_nonce'])){
-            $nonce = $_REQUEST['wp_nonce'];
+            $nonce = sanitize_text_field($_REQUEST['wp_nonce']);
             if ( ! wp_verify_nonce( $nonce, 'mo-openid-oauth-app-nonce' ) ) {
                 wp_die('<strong>ERROR</strong>: Invalid Request.');
             }
@@ -1532,7 +1494,7 @@ function mo_openid_login_validate(){
 
     else if( isset($_POST['mo_openid_user_otp_validation_nonce']) and isset( $_POST['otp_field']) and $_POST['option'] == 'mo_openid_otp_validation' )
     {
-        $nonce = $_POST['mo_openid_user_otp_validation_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_user_otp_validation_nonce']);
         if ( ! wp_verify_nonce( $nonce, 'mo-openid-user-otp-validation-nonce' ) ) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
@@ -1564,7 +1526,7 @@ function mo_openid_login_validate(){
     }
 
     else if( isset($_POST['mo_openid_connect_verify_nonce']) and isset( $_POST['option'] ) and $_POST['option'] == "mo_openid_connect_verify_customer" ) {    //register the admin to miniOrange
-        $nonce = $_POST['mo_openid_connect_verify_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_connect_verify_nonce']);
         if (!wp_verify_nonce($nonce, 'mo-openid-connect-verify-nonce')) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         }

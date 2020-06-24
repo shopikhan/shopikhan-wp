@@ -129,6 +129,10 @@
     border-left: 4px solid #23282d;
 }
 
+.wpclever_settings_page .wpclever_settings_page_content table tr.heading .dashicons {
+    font-size: 14px;
+}
+
 .wpclever_settings_page .wpclever_settings_page_content table {
     margin: 0;
 }

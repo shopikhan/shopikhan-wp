@@ -4,7 +4,7 @@ Donate link: https://www.miniorange.com
 Tags: social login, facebook login, google login, twitter login, Vkontakte login, Woocommerce, social, facebook, twitter, google, login, google, social connect, social network login, social plugin, Vkontakte, LinkedIn
 Requires at least: 2.0.2
 Tested up to: 5.4
-Stable tag: 7.3.7
+Stable tag: 7.3.8
 License URI: http://miniorange.com/usecases/miniOrange_User_Agreement.pdf
 
 Social Login with Google, Facebook, Apple, Twitter, Reddit, Vkontakte, LinkedIn and more. GDPR compliant. Social sharing and social comments. 24x7 Support.
@@ -179,6 +179,12 @@ Please email us at info@miniorange.com. You can also submit your query from the 
 
 
 == Changelog ==
+= 7.3.8 =
+* Updated Odnoklassniki custom app fix in premium versions.
+* Updated BuddyPress mapping bug fix in premium version.
+* Updated depricated array and string fix.
+* Added Yandex app in premium applications.
+
 = 7.3.7 =
 * Updated facebook insrtuctions.
 * Minor UI changes.
@@ -713,6 +719,12 @@ SECURITY FIXES
 * First version of Social Login, Social Sharing plugin.
 
 == Upgrade Notice ==
+= 7.3.8 =
+* Updated Odnoklassniki custom app fix in premium versions.
+* Updated BuddyPress mapping bug fix in premium version.
+* Updated depricated array and string fix.
+* Added Yandex app in premium applications.
+
 = 7.3.7 =
 * Updated facebook insrtuctions.
 * Minor UI changes.

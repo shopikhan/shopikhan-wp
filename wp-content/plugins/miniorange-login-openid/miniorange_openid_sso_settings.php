@@ -4,12 +4,12 @@
  * Plugin Name: Social Login, Social Sharing by miniOrange
  * Plugin URI: https://www.miniorange.com
  * Description: Allow your users to login, comment and share with Facebook, Google, Apple, Twitter, LinkedIn etc using customizable buttons.
- * Version: 7.3.7
+ * Version: 7.3.8
  * Author: miniOrange
  * License URI: http://miniorange.com/usecases/miniOrange_User_Agreement.pdf
  */
 
-define('MO_OPENID_SOCIAL_LOGIN_VERSION', '7.3.7');
+define('MO_OPENID_SOCIAL_LOGIN_VERSION', '7.3.8');
 define('plugin_url', plugin_dir_url(__FILE__) . "includes/images/icons/");
 define('MOSL_PLUGIN_DIR',str_replace('/','\\',plugin_dir_path(__FILE__)));
 require('miniorange_openid_sso_settings_page.php');
@@ -236,6 +236,8 @@ Thank you.';
     }
 
     function mo_openid_plugin_settings_script() {
+        wp_enqueue_script( 'mo_openid_admin_settings_jquery_script', plugins_url('includes/js/config-jquery.js', __FILE__ ));
+        wp_enqueue_script( 'mo_openid_admin_settings_jquery1_script', plugins_url('includes/js/config-jquery-ui.js', __FILE__ ));
         wp_enqueue_script( 'mo_openid_admin_settings_phone_script', plugins_url('includes/js/phone.js', __FILE__ ));
         wp_enqueue_script( 'mo_openid_admin_settings_color_script', plugins_url('includes/jscolor/jscolor.js', __FILE__ ));
         wp_enqueue_script( 'mo_openid_admin_settings_script', plugins_url('includes/js/settings.js?version=4.9.6', __FILE__ ), array('jquery'));
@@ -319,11 +321,11 @@ Thank you.';
             add_action('admin_notices', 'mo_openid_activation_message');
         }
 
-        $value = isset( $_POST['option']) ? $_POST['option']: '';
+        $value = isset( $_POST['option']) ? sanitize_text_field($_POST['option']): '';
         switch( $value )
         {
             case 'mo_openid_customise_social_icons':
-                $nonce = $_POST['mo_openid_customise_social_icons_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_customise_social_icons_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-customise-social-icons-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }
@@ -348,7 +350,7 @@ Thank you.';
             case 'mo_openid_enable_gdpr':
                 {
                     if (!mo_openid_restrict_user()) {
-                        $nonce = $_POST['mo_openid_enable_gdpr_nonce'];
+                        $nonce = sanitize_text_field($_POST['mo_openid_enable_gdpr_nonce']);
                         if (!wp_verify_nonce($nonce, 'mo-openid-enable-gdpr-nonce')) {
                             wp_die('<strong>ERROR</strong>: Invalid Request.');
                         } else {
@@ -364,7 +366,7 @@ Thank you.';
                 }
                 break;
             case 'mo_openid_contact_us_query_option':
-                $nonce = $_POST['mo_openid_contact_us_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_contact_us_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-contact-us-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -392,7 +394,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_rateus_query_option':
-                $nonce = $_POST['mo_openid_rateus_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_rateus_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-rateus-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -418,7 +420,7 @@ Thank you.';
                 break;
 
             case 'cronmo_openid_rateus_query_option':
-                $nonce = $_POST['cronmo_openid_rateus_nonce'];
+                $nonce = sanitize_text_field($_POST['cronmo_openid_rateus_nonce']);
                 if (!wp_verify_nonce($nonce, 'cronmo-openid-rateus-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -447,7 +449,7 @@ Thank you.';
 
 
             case 'mo_openid_enable_redirect':
-                $nonce=$_POST['mo_openid_enable_redirect_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_enable_redirect_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-redirect-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }else {
@@ -466,7 +468,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_enable_registration':
-                $nonce=$_POST['mo_openid_enable_registration_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_enable_registration_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-registration-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }else {
@@ -481,7 +483,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_enable_display':
-                $nonce=$_POST['mo_openid_enable_display_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_enable_display_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-display-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }else {
@@ -495,24 +497,20 @@ Thank you.';
                 break;
 
             case 'mo_openid_verify_license':
-                $nonce = $_POST['mo_openid_verify_license_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_verify_license_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-verify-license-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }
                 else {
                     $code = trim($_POST['openid_licence_key']);
                     $customer = new CustomerOpenID();
-                    $content = json_decode($customer->check_customer_ln($_POST['licience_type']), true);
+                    $content = json_decode($customer->check_customer_ln(sanitize_text_field($_POST['licience_type'])), true);
                     if (strcasecmp($content['status'], 'SUCCESS') == 0) {
                         $content = json_decode($customer->mo_openid_vl($code, false), true);
                         update_option('mo_openid_vl_check_t', time());
                         if (strcasecmp($content['status'], 'SUCCESS') == 0) {
                             $key = get_option('mo_openid_customer_token');
-                            if($_POST['licience_type']=="general") {
-                                update_option('mo_openid_opn_lk', MOAESEncryption::encrypt_data($code, $key));
-                                update_option('mo_openid_message', 'Your license is verified. You can now setup the plugin.');
-                            }
-                            else if($_POST['licience_type']=="extra_attributes_addon") {
+                            if($_POST['licience_type']=="extra_attributes_addon") {
                                 update_option('mo_openid_opn_lk_extra_attr_addon', MOAESEncryption::encrypt_data($code, $key));
                                 update_option('mo_openid_message', 'Your addon license is verified. You can now setup the addon plugin.');
                             }
@@ -550,7 +548,7 @@ Thank you.';
             case 'mo_openid_account_linking':
                 {
                     if (!mo_openid_restrict_user()) {
-                        $nonce = $_POST['mo_openid_enable_account_linking_nonce'];
+                        $nonce = sanitize_text_field($_POST['mo_openid_enable_account_linking_nonce']);
                         if (!wp_verify_nonce($nonce, 'mo-openid-enable-account-linking-nonce')) {
                             wp_die('<strong>ERROR</strong>: Invalid Request.');
                         } else {
@@ -570,7 +568,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_profile_completion':
-                $nonce = $_POST['mo_openid_enable_profile_completion_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_enable_profile_completion_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-premium-feature-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -604,7 +602,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_enable_customize_text':
-                $nonce=$_POST['mo_openid_enable_customize_text_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_enable_customize_text_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-customize-text-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }else {
@@ -627,7 +625,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_enable_share_display':
-                $nonce=$_POST['mo_openid_enable_share_display_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_enable_share_display_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-share-display-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }
@@ -653,7 +651,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_feedback':
-                $nonce = $_POST['mo_openid_feedback_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_feedback_nonce']);
                 if ( ! wp_verify_nonce( $nonce, 'mo-openid-feedback-nonce' ) ) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -705,7 +703,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_share_cnt':
-                $nonce=$_POST['mo_openid_share_cnt_nonce'];
+                $nonce=sanitize_text_field($_POST['mo_openid_share_cnt_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-share-cnt-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 }else {
@@ -717,7 +715,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_comment_selectapp':
-                $nonce = $_POST['mo_openid_enable_comment_selectapp_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_enable_comment_selectapp_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-comment-selectapp-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -731,7 +729,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_comment_display':
-                $nonce = $_POST['mo_openid_enable_comment_display_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_enable_comment_display_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-comment-display-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -743,7 +741,7 @@ Thank you.';
                 break;
 
             case 'mo_openid_comment_labels':
-                $nonce = $_POST['mo_openid_enable_comment_labels_nonce'];
+                $nonce = sanitize_text_field($_POST['mo_openid_enable_comment_labels_nonce']);
                 if (!wp_verify_nonce($nonce, 'mo-openid-enable-comment-labels-nonce')) {
                     wp_die('<strong>ERROR</strong>: Invalid Request.');
                 } else {
@@ -965,20 +963,20 @@ Thank you.';
         }
         $curr_user = get_current_user_id();
         if ($curr_user == 0) {
-            $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : "";
-            $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : "";
-            $user_full_name = isset($_POST['user_full_name']) ? $_POST['user_full_name'] : "";
-            $user_url = isset($_POST['user_url']) ? $_POST['user_url'] : "";
-            $call = $_POST['call'];
-            $user_profile_url = isset($_POST['user_profile_url']) ? $_POST['user_profile_url'] : "";
-            $user_picture = isset($_POST['user_picture']) ? $_POST['user_picture'] : "";
-            $username = isset($_POST['username']) ? $_POST['username'] : "";
-            $user_email = isset($_POST['user_email']) ? $_POST['user_email'] : "";
-            $random_password = isset($_POST['random_password']) ? $_POST['random_password'] : "";
-            $decrypted_app_name = isset($_POST['decrypted_app_name']) ? $_POST['decrypted_app_name'] : "";
-            $decrypted_user_id = isset($_POST['decrypted_user_id']) ? $_POST['decrypted_user_id'] : "";
-            $social_app_name = isset($_POST['social_app_name']) ? $_POST['social_app_name'] : "";
-            $social_user_id = isset($_POST['social_user_id']) ? $_POST['social_user_id'] : "";
+            $last_name = isset($_POST['last_name']) ? sanitize_text_field($_POST['last_name']) : "";
+            $first_name = isset($_POST['first_name']) ? sanitize_text_field($_POST['first_name']) : "";
+            $user_full_name = isset($_POST['user_full_name']) ? sanitize_text_field($_POST['user_full_name']) : "";
+            $user_url = isset($_POST['user_url']) ? sanitize_text_field($_POST['user_url']) : "";
+            $call = sanitize_text_field($_POST['call']);
+            $user_profile_url = isset($_POST['user_profile_url']) ? sanitize_text_field($_POST['user_profile_url']) : "";
+            $user_picture = isset($_POST['user_picture']) ? sanitize_text_field($_POST['user_picture']) : "";
+            $username = isset($_POST['username']) ? sanitize_text_field($_POST['username']) : "";
+            $user_email = isset($_POST['user_email']) ? sanitize_text_field($_POST['user_email']) : "";
+            $random_password = isset($_POST['random_password']) ? sanitize_text_field($_POST['random_password']) : "";
+            $decrypted_app_name = isset($_POST['decrypted_app_name']) ? sanitize_text_field($_POST['decrypted_app_name']) : "";
+            $decrypted_user_id = isset($_POST['decrypted_user_id']) ? sanitize_text_field($_POST['decrypted_user_id']) : "";
+            $social_app_name = isset($_POST['social_app_name']) ? sanitize_text_field($_POST['social_app_name']) : "";
+            $social_user_id = isset($_POST['social_user_id']) ? sanitize_text_field($_POST['social_user_id']) : "";
         } else {
             $last_name = "";
             $first_name = "";

@@ -72,12 +72,12 @@ function mo_openid_account_linking($messages) {
 
 function mo_openid_social_linking_action(){
     if(!mo_openid_restrict_user()) {
-        $nonce = $_POST['mo_openid_social_linking_nonce'];
+        $nonce = sanitize_text_field($_POST['mo_openid_social_linking_nonce']);
         if (!wp_verify_nonce($nonce, 'mo-openid-social-linking')) {
             wp_die('<strong>ERROR</strong>: Invalid Request.');
         } else {
 
-            if ($_POST['enabled'] == "true") {
+            if (sanitize_text_field($_POST['enabled']) == "true") {
                 update_option('mo_openid_account_linking_enable', 1);
 
             } else

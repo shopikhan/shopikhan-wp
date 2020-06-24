@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfbb5222b79418e17397088721689fdb0
+class ComposerStaticInit1b08c55c3d6fb768f20829ac79098bd6
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -250,8 +250,8 @@ class ComposerStaticInitfbb5222b79418e17397088721689fdb0
         'Flexible_Checkout_Fields_Field_Type_Settings' => __DIR__ . '/../..' . '/classes/field-type-settings.php',
         'Flexible_Checkout_Fields_Field_Validation' => __DIR__ . '/../..' . '/classes/filed-validation.php',
         'Flexible_Checkout_Fields_Myaccount_Edit_Address' => __DIR__ . '/../..' . '/classes/myaccount-edit-address.php',
-        'Flexible_Checkout_Fields_Myaccount_Field_Processor' => __DIR__ . '/../..' . '/classes/myaccount-filed-processor.php',
-        'Flexible_Checkout_Fields_Plugin' => __DIR__ . '/../..' . '/classes/class-flexible-checkout-fields-plugin.php',
+        'Flexible_Checkout_Fields_Myaccount_Field_Processor' => __DIR__ . '/../..' . '/classes/myaccount-field-processor.php',
+        'Flexible_Checkout_Fields_Plugin' => __DIR__ . '/../..' . '/classes/plugin.php',
         'Flexible_Checkout_Fields_Settings' => __DIR__ . '/../..' . '/classes/settings.php',
         'Flexible_Checkout_Fields_User_Meta' => __DIR__ . '/../..' . '/classes/user-meta.php',
         'Flexible_Checkout_Fields_User_Meta_Checkout' => __DIR__ . '/../..' . '/classes/user-meta-checkout.php',
@@ -278,9 +278,9 @@ class ComposerStaticInitfbb5222b79418e17397088721689fdb0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfbb5222b79418e17397088721689fdb0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfbb5222b79418e17397088721689fdb0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitfbb5222b79418e17397088721689fdb0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1b08c55c3d6fb768f20829ac79098bd6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1b08c55c3d6fb768f20829ac79098bd6::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1b08c55c3d6fb768f20829ac79098bd6::$classMap;
 
         }, null, ClassLoader::class);
     }

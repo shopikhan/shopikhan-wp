@@ -4,7 +4,6 @@ namespace FcfVendor;
 
 /**
  * @var string $plugin_version
- * @var string $plugin_release_timestamp
  * @var string $plugin_name
  * @var string $plugin_class_name
  * @var string $plugin_text_domain

@@ -5,8 +5,8 @@
  Plugin URI: https://profiles.wordpress.org/rynald0s
  Description: This plugin automatically hides all other shipping methods when "Free shipping" is available during checkout. It also includes an option to keep "local pickup" available, alongside "frees shipping"
  Author: Rynaldo Stoltz
- Author URI: https://github.com/rynaldos
- Version: 1.3
+ Author URI: http://rynaldo.com
+ Version: 1.4
  License: GPLv3 or later License
  URI: http://www.gnu.org/licenses/gpl-3.0.html
  */

@@ -247,12 +247,12 @@ function mo_openid_social_login_validate_otp($username, $user_email, $first_name
 
 function mo_openid_profile_comp_action(){
 
-    $nonce = $_POST['mo_openid_profile_comp_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_profile_comp_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-profile-comp')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
 
-        if($_POST['enabled']=="true") {
+        if(sanitize_text_field($_POST['enabled'])=="true") {
             update_option('mo_openid_enable_profile_completion', 1);
 
         }

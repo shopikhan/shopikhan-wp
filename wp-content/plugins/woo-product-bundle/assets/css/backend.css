@@ -262,16 +262,6 @@ table.wp-list-table span.product-type.woosb:before {
     color: #96588a;
 }
 
-#woosb_meta_box .inside {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-#woosb_meta_box .inside ul {
-    list-style: circle;
-    margin-left: 18px;
-}
-
 .woosb-state {
     font-weight: normal;
     font-style: italic;

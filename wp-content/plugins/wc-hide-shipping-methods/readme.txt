@@ -3,10 +3,10 @@
 Contributors: rynald0s
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods, hide shipping rates, force free shipping, hide other shipping methods, when free shipping, disable other shipping, keep local pickup
 Requires at least: 4.5.0
-Tested up to: 5.0.3
-Stable tag: 1.3
-WC requires at least: 2.6
-WC tested up to: 3.5.4
+Tested up to: 5.4.2
+Stable tag: 1.4
+WC requires at least: 3
+WC tested up to: 4.0.2
 License: GPLv3 or later License
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,6 +60,13 @@ A: You can submit a issues / feature requests on the [Public GitHub Repository](
 * updated readme.txt file
 * updated version number
 
+= 1.4 = 
+* tested for WordPress 5.4.2
+* tested for WooCommerce 4.2.0
+* updated readme.txt file
+* updated version numbers
+* updated author URI
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -77,3 +84,10 @@ A: You can submit a issues / feature requests on the [Public GitHub Repository](
 * tested for WooCommerce 3.0.4
 * updated readme.txt file
 * updated version number
+
+= 1.4 = 
+* tested for WordPress 5.4.2
+* tested for WooCommerce 4.2.0
+* updated readme.txt file
+* updated version numbers
+* updated author URI

@@ -90,8 +90,7 @@ function mo_openid_show_apps()
     <div id="mo_openid_notice_snackbar"><label id="mo_openid_notice_message"></label></div>
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
         //to set heading name
         jQuery('#mo_openid_page_heading').text('<?php echo mo_sl('Configure Applications'); ?>');

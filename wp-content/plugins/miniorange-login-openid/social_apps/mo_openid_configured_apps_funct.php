@@ -2,7 +2,7 @@
 function mo_openid_validate_code()
 {
     if (isset($_REQUEST['code'])) {
-        $code = $_REQUEST['code'];
+        $code = sanitize_text_field($_REQUEST['code']);
         return $code;
     } // this handles incorrect scope(only for linkedin).
     else if (array_key_exists('error', $_REQUEST)) {
@@ -10,12 +10,12 @@ function mo_openid_validate_code()
             update_option('mo_openid_test_configuration', 0);
             echo '<div style="color: #a94442;background-color: #f2dede;padding: 15px;margin-bottom: 20px;text-align:center;border:1px solid #E6B3B2;font-size:18pt;">TEST FAILED</div>
 						<div style="color: #a94442;font-size:14pt; margin-bottom:20px;">WARNING: Please enter correct scope value and try again. <br/>';
-            print_r($_REQUEST);
+            print_r(esc_attr($_REQUEST));
             echo '</div>
 						<div style="display:block;text-align:center;margin-bottom:4%;"><img style="width:15%;"src="' . plugin_dir_url(__FILE__) . '/includes/images/wrong.png"></div>';
             exit;
         } else {
-            echo $_REQUEST['error_description'] . "<br>";
+            echo esc_attr($_REQUEST['error_description']) . "<br>";
             wp_die("Allow access to your profile to get logged in. Click <a href=" . get_site_url() . ">here</a> to go back to the website.");
             exit;
         }
@@ -253,32 +253,7 @@ function mo_openid_login_user($linked_email_id,$user_id,$user,$user_picture,$use
         update_user_meta($user_id, 'moopenid_user_avatar', $user_picture);
     //comment by shresth as no add_action is found against this hook
     //do_action('miniorange_collect_attributes_for_authenticated_user', $user, mo_openid_get_redirect_url());
-    if (get_option("mo_openid_user_moderation") == 1) {
-        $x = get_user_meta($linked_email_id, 'activation_state');
-        if ($x[0] != '1') {
-            do_action('wp_login', $user->user_login, $user);
-        } else {
-            if($user_mod_msg==0)
-                $msg="Successfully registered! You will get notification after activation of your account";
-            else
-                $msg="Your account is not activated by Admin. You will get mail after activation";
-            ?>
-            <script>
-                var pop_up = '<?php echo get_option('mo_openid_popup_window');?>';
-                if (pop_up == '0') {
-                    alert("<?php  echo $msg;?>");
-                    window.location = "<?php  echo esc_url (get_option ('siteurl'));?>";
-                } else {
-                    alert("<?php  echo $msg;?>");
-                    window.close();
-                }
-            </script>
-            <?php
-            exit();
-        }
-    }
-    else
-        do_action('wp_login', $user->user_login, $user);
+    do_action('wp_login', $user->user_login, $user);
     exit;
 }
 

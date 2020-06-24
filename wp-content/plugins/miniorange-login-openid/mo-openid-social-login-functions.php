@@ -14,7 +14,7 @@ function mo_openid_end_session() {
 
 function mo_openid_initialize_social_login(){
     $client_name = "wordpress";
-    $appname = $_REQUEST['app_name'];
+    $appname = sanitize_text_field($_REQUEST['app_name']);
     if($appname=='yaahoo')
         $appname='yahoo';
     $timestamp = round(microtime(true) * 1000);
@@ -1223,19 +1223,19 @@ function mo_pop_show_verify_password_page() {
 }
 
 function mo_openid_share_action(){
-    $nonce = $_POST['mo_openid_share_nonce'];
+    $nonce = sanitize_text_field($_POST['mo_openid_share_nonce']);
     if (!wp_verify_nonce($nonce, 'mo-openid-share')) {
         wp_die('<strong>ERROR</strong>: Invalid Request.');
     } else {
 
-        $enable_id = $_POST['enabled'];
+        $enable_id = sanitize_text_field($_POST['enabled']);
 
         if ($enable_id == "true") {
 
-            update_option($_POST['id_name'], 1);
+            update_option(sanitize_text_field($_POST['id_name']), 1);
         } else if ($enable_id == "false") {
 
-            update_option($_POST['id_name'], 0);
+            update_option(sanitize_text_field($_POST['id_name']), 0);
         }
     }
 }
@@ -1316,11 +1316,11 @@ function update_custom_data($user_id)
             if($type == "dropdown" && $_POST['user_role'])
             {
                 $user = get_user_by('ID',$user_id);
-                $user->set_role( strtolower($_POST['user_role']) );
-                update_user_meta($user_id, $field_update, $_POST['user_role']);
+                $user->set_role( strtolower(sanitize_text_field($_POST['user_role'])) );
+                update_user_meta($user_id, $field_update, sanitize_text_field($_POST['user_role']));
             }
             else
-                update_user_meta($user_id, $field_update, $_POST[$field]);
+                update_user_meta($user_id, $field_update, sanitize_text_field($_POST[$field]));
         } else {
             $flag = 0;
             $str_res = explode(";", $add_field);
@@ -1328,7 +1328,7 @@ function update_custom_data($user_id)
                 if (isset($_POST[$field . $a])) {
                     if ($flag != 0)
                         $res = $res . ";";
-                    $res = $res . $_POST[$field . $a];
+                    $res = $res . sanitize_text_field($_POST[$field . $a]);
                     $flag++;
                 }
                 $a++;
@@ -1349,7 +1349,7 @@ function mo_openid_activation_message() {
 }
 
 function mo_openid_rating_given(){
-    update_option("mo_openid_rating_given",$_POST['rating']);
+    update_option("mo_openid_rating_given",sanitize_text_field($_POST['rating']));
 }
 
 function mo_openid_add_custom_column1($columns){

@@ -16,8 +16,6 @@ final class PluginBootstrap
     /** @var string */
     private $plugin_version;
     /** @var string */
-    private $plugin_release_timestamp;
-    /** @var string */
     private $plugin_name;
     /** @var string */
     private $plugin_class_name;
@@ -54,7 +52,6 @@ final class PluginBootstrap
     public function __construct($plugin_version, $plugin_release_timestamp, $plugin_name, $plugin_class_name, $plugin_text_domain, $plugin_dir, $plugin_file, array $requirements, $product_id, \FcfVendor\WPDesk\Plugin\Flow\Initialization\InitializationFactory $build_factory)
     {
         $this->plugin_version = $plugin_version;
-        $this->plugin_release_timestamp = $plugin_release_timestamp;
         $this->plugin_name = $plugin_name;
         $this->plugin_class_name = $plugin_class_name;
         $this->plugin_text_domain = $plugin_text_domain;
@@ -142,7 +139,6 @@ final class PluginBootstrap
         $plugin_info->set_version($this->plugin_version);
         $plugin_info->set_product_id($this->product_id);
         $plugin_info->set_text_domain($this->plugin_text_domain);
-        $plugin_info->set_release_date(new \DateTime($this->plugin_release_timestamp));
         $plugin_info->set_plugin_url(\plugins_url(\dirname(\plugin_basename($this->plugin_file))));
         return $plugin_info;
     }

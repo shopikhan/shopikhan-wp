@@ -47,9 +47,9 @@ class MOAESEncryption {
     }
 
     private static function pkcs5_unpad($text) {
-        $pad = ord($text{strlen($text) - 1});
+        $pad = ord($text[strlen($text) - 1]);
         if ($pad > strlen($text)) return false;
-        if (strspn($text, $text{strlen($text) - 1}, strlen($text) - $pad) != $pad) {
+        if (strspn($text, $text[strlen($text) - 1], strlen($text) - $pad) != $pad) {
             return false;
         }
         return substr($text, 0, -1 * $pad);

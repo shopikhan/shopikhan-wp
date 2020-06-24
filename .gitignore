@@ -1,6 +1,6 @@
 # Ignore everything in the root except the "wp-content" directory.
-/*
 !.gitignore
+shopikhan.tar.gz
 !wp-content/
 !wp-config.php
 

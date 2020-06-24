@@ -4,7 +4,6 @@ namespace FcfVendor;
 
 /**
  * @var string                                                       $plugin_version
- * @var string                                                       $plugin_release_timestamp
  * @var string                                                       $plugin_name
  * @var string                                                       $plugin_class_name
  * @var string                                                       $plugin_text_domain
@@ -23,7 +22,19 @@ if (\PHP_VERSION_ID > 50300) {
     if (!isset($plugin_init_factory)) {
         $plugin_init_factory = new \FcfVendor\WPDesk\Plugin\Flow\Initialization\Simple\SimpleFactory();
     }
-    $bootstrap = new \FcfVendor\WPDesk\Plugin\Flow\PluginBootstrap($plugin_version, $plugin_release_timestamp, $plugin_name, $plugin_class_name, $plugin_text_domain, $plugin_dir, $plugin_file, $requirements, $product_id, $plugin_init_factory);
+    $bootstrap = new \FcfVendor\WPDesk\Plugin\Flow\PluginBootstrap(
+        $plugin_version,
+        null,
+        // deprecated
+        $plugin_name,
+        $plugin_class_name,
+        $plugin_text_domain,
+        $plugin_dir,
+        $plugin_file,
+        $requirements,
+        $product_id,
+        $plugin_init_factory
+    );
     $bootstrap->run();
     // all optional vars must be cleared
     unset($plugin_init_factory);
