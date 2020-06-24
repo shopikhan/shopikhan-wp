@@ -2,7 +2,9 @@
 !.gitignore
 shopikhan.tar.gz
 !wp-content/
+
 wp-config.php
+.htaccess
 
 # Ignore everything in the "wp-content" directory, except the "plugins"
 # and "themes" directories.
